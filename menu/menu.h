@@ -7,5 +7,6 @@ class Menu
 {
 public:
     static int numberChoiceMenu(std::vector<std::string> options);
-    static bool yesNoMenu(std::string prompt);
+    static bool boolPrompt(std::string prompt);
+    static double positiveDoublePrompt(std::string prompt);
 };

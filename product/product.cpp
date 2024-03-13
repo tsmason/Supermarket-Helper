@@ -1,3 +1,3 @@
 #include "product.h"
 
-static std::vector<Product> products;
+std::vector<Product> Product::products;

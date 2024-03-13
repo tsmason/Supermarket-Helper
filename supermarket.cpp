@@ -1,5 +1,7 @@
 #include <ncurses.h>
+
 #include "fixture/fixture.h"
+#include "product/productmenu.h"
 #include "menu/menu.h"
 
 int main()
@@ -23,9 +25,25 @@ int main()
         int selection = Menu::numberChoiceMenu(options);
 
         // if the user selects 4, exit the game
-        if (selection == 4)
+        switch (selection)
         {
+        case 1:
+            // TODO: start day
+            break;
+        case 2:
+            // show product menu
+            ProductMenu::displayProductMenu();
+            break;
+        case 3:
+            // TODO: show fixtures menu
+            break;
+        case 4:
             running = false;
+            break;
+        default:
+            // output a message saying something's wrong
+            printw("Something's wrong, hit default in main menu\n");
+            break;
         }
 
         clear();

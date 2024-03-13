@@ -1,5 +1,5 @@
+#include <ncurses.h>
 #include "menu.h"
-#include "ncurses.h"
 
 int Menu::numberChoiceMenu(std::vector<std::string> options)
 {
@@ -53,7 +53,7 @@ int Menu::numberChoiceMenu(std::vector<std::string> options)
     return choice;
 }
 
-bool Menu::yesNoMenu(std::string prompt)
+bool Menu::boolPrompt(std::string prompt)
 {
     printw("\n");
     // ask the user the prompt
@@ -84,4 +84,43 @@ bool Menu::yesNoMenu(std::string prompt)
             refresh();
         }
     }
+}
+
+double Menu::positiveDoublePrompt(std::string prompt)
+{
+    printw("\n");
+    // print the prompt
+    printw("%s", prompt.c_str());
+    refresh();
+
+    double amount;
+    while (true)
+    {
+        char amountArray[256];
+        getstr(amountArray);
+        std::string amountString = amountArray;
+
+        try
+        {
+            amount = std::stod(amountString);
+            if (amount > 0)
+            {
+                break;
+            }
+            else
+            {
+                printw("\n");
+                printw("Invalid input. Please enter a positive number: ");
+                refresh();
+            }
+        }
+        catch (const std::invalid_argument &e)
+        {
+            printw("\n");
+            printw("Invalid input. Please enter a positive number: ");
+            refresh();
+        }
+    }
+
+    return amount;
 }

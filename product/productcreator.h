@@ -4,7 +4,7 @@
 class ProductCreator
 {
 public:
-    static Product createProduct();
+    static void createProduct();
     static bool confirmCreation();
 
 private:
