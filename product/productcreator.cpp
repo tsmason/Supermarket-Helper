@@ -60,8 +60,32 @@ Product ProductCreator::gatherProductInformation()
     // calculate the price with profit margin
     double price = cost / (1 - INITIAL_PROFIT_MARGIN);
 
+    // ask the user for the case size
+    int caseSize = Menu::positiveIntPrompt("Enter the case size: ");
+
+    int amountPerSlot = Menu::positiveIntPrompt("Enter the amount per slot: ");
+
+    // prompt the user for the Fixture Type using a number choice menu
+    std::vector<std::string> fixtureOptions = {"Freezer", "Fridge", "Shelf"};
+    int fixtureSelection = Menu::numberChoiceMenu(fixtureOptions);
+    Fixture::FixtureType fixtureType;
+    switch (fixtureSelection)
+    {
+    case 1:
+        fixtureType = Fixture::FixtureType::Freezer;
+        break;
+    case 2:
+        fixtureType = Fixture::FixtureType::Fridge;
+        break;
+    case 3:
+        fixtureType = Fixture::FixtureType::Shelf;
+        break;
+    default:
+        printw("Something's wrong, hit default in fixture create menu\n");
+    }
+
     // return a new product with the gathered information
-    return Product(name, brand, price, marketPrice, cost);
+    return Product(name, brand, price, marketPrice, cost, caseSize, amountPerSlot, fixtureType);
 }
 
 bool ProductCreator::confirmProductInformation(Product product)

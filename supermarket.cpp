@@ -1,6 +1,6 @@
 #include <ncurses.h>
 
-#include "fixture/fixture.h"
+#include "fixture/fixturemenu.h"
 #include "product/productmenu.h"
 #include "menu/menu.h"
 
@@ -11,6 +11,9 @@ int main()
     int day = 1;
 
     Fixture::initializePrototypes();
+    // deserialize fixtures
+    Fixture::deserialize_fixtures();
+    Product::deserialize_products();
 
     // bool to keep the game running
     bool running = true;
@@ -35,7 +38,8 @@ int main()
             ProductMenu::displayProductMenu();
             break;
         case 3:
-            // TODO: show fixtures menu
+            // show fixture menu
+            FixtureMenu::displayFixtureMenu();
             break;
         case 4:
             running = false;
@@ -51,4 +55,7 @@ int main()
 
     // end ncurses
     endwin();
+    // save fixtures
+    Product::save_products();
+    Fixture::save_fixtures();
 }

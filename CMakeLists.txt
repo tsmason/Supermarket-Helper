@@ -5,12 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package (Curses REQUIRED)
+find_package(Boost REQUIRED COMPONENTS serialization)
 
 file(GLOB SOURCES "supermarket.cpp" "product/*.cpp" "fixture/*.cpp" "menu/*.cpp")
 add_executable(smhelper ${SOURCES})
 
-target_link_libraries(smhelper ${CURSES_LIBRARIES})
-target_include_directories(smhelper PRIVATE ${CURSES_INCLUDE_DIR})
+target_link_libraries(smhelper ${CURSES_LIBRARIES} ${Boost_LIBRARIES})
+target_include_directories(smhelper PRIVATE ${CURSES_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

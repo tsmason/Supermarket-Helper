@@ -48,4 +48,5 @@ void ProductMenu::displayProductInformation(Product product)
     printw("Price: %.2f\n", product.getPrice());
     printw("Market Price: %.2f\n", product.getMarketPrice());
     printw("Cost: %.2f\n", product.getCost());
+    printw("Amount per Slot: %d\n", product.getAmountPerSlot());
 }

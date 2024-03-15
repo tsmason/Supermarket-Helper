@@ -124,3 +124,45 @@ double Menu::positiveDoublePrompt(std::string prompt)
 
     return amount;
 }
+
+int Menu::positiveIntPrompt(std::string prompt)
+{
+    printw("\n");
+    // print the prompt
+    printw("%s", prompt.c_str());
+    // refresh the screen
+    refresh();
+
+    int amount;
+
+    // ensure the amount is a positive integer
+    while (true)
+    {
+        char amountArray[256];
+        getstr(amountArray);
+        std::string amountString = amountArray;
+
+        try
+        {
+            amount = std::stoi(amountString);
+            if (amount > 0)
+            {
+                break;
+            }
+            else
+            {
+                printw("\n");
+                printw("Invalid input. Please enter a positive number: ");
+                refresh();
+            }
+        }
+        catch (const std::invalid_argument &e)
+        {
+            printw("\n");
+            printw("Invalid input. Please enter a positive number: ");
+            refresh();
+        }
+    }
+
+    return amount;
+}
